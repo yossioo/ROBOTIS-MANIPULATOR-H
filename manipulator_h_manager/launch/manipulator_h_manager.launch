@@ -2,7 +2,8 @@
 
 <launch>    
 
-    <param name="gazebo"                   value="false"     type="bool"/>
+    <param name="gazebo"                   value="true"     type="bool"/>
+<!--     <arg name="gazebo" default="true"/> -->
     <param name="gazebo_robot_name"        value="robotis_manipulator_h" />
 
     <param name="offset_table"             value="$(find manipulator_h_manager)/config/offset.yaml"/>
@@ -11,6 +12,7 @@
       
     <!-- Manipulator Manager -->
     <node name="manipulator_h_manager" pkg="manipulator_h_manager" type="manipulator_h_manager" output="screen"/>
+    <node name="manipulator_h_gui" pkg="manipulator_h_gui" type="manipulator_h_gui" output="screen"/>   <!--ADDED THIS LINE TO START GUI -->
     
 </launch>
 

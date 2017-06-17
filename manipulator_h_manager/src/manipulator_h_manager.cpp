@@ -60,6 +60,7 @@ int main(int argc, char **argv)
   controller->gazebo_mode_ = nh.param<bool>("gazebo", false);
   if (controller->gazebo_mode_ == true)
   {
+    ROS_WARN("GAZEBO MODE = TRUE");
     std::string robot_name = nh.param<std::string>("gazebo_robot_name", "");
     if (robot_name != "")
       controller->gazebo_robot_name_ = robot_name;

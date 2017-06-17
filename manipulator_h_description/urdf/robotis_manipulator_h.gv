@@ -1,0 +1,38 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"link1" [label="link1"];
+"link2" [label="link2"];
+"link3" [label="link3"];
+"link4" [label="link4"];
+"link5" [label="link5"];
+"link6" [label="link6"];
+"end_link" [label="end_link"];
+"prox_l" [label="prox_l"];
+"dist_l" [label="dist_l"];
+"prox_r" [label="prox_r"];
+"dist_r" [label="dist_r"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "world_fixed" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"world_fixed" -> "link1"
+"link1" -> "joint1" [label="xyz: 0 0 0.126 \nrpy: 0 -0 0"]
+"joint1" -> "link2"
+"link2" -> "joint2" [label="xyz: 0 0.069 0.033 \nrpy: 0 -0 0"]
+"joint2" -> "link3"
+"link3" -> "joint3" [label="xyz: 0.03 -0.0115 0.264 \nrpy: 0 -0 0"]
+"joint3" -> "link4"
+"link4" -> "joint4" [label="xyz: 0.195 -0.0575 0.03 \nrpy: 0 -0 0"]
+"joint4" -> "link5"
+"link5" -> "joint5" [label="xyz: 0.063 0.045 0 \nrpy: 0 -0 0"]
+"joint5" -> "link6"
+"link6" -> "joint6" [label="xyz: 0.123 -0.045 0 \nrpy: 3.14159 0 0"]
+"joint6" -> "end_link"
+"end_link" -> "joint_l1" [label="xyz: 0.1055 -0.03 0 \nrpy: 1.5708 -0 0"]
+"joint_l1" -> "prox_l"
+"prox_l" -> "joint_l2" [label="xyz: 0.052 0 0 \nrpy: 0 -0 0"]
+"joint_l2" -> "dist_l"
+"end_link" -> "joint_r1" [label="xyz: 0.1055 0.03 0 \nrpy: -1.5708 0 0"]
+"joint_r1" -> "prox_r"
+"prox_r" -> "joint_r2" [label="xyz: 0.052 0 0 \nrpy: 0 -0 0"]
+"joint_r2" -> "dist_r"
+}
