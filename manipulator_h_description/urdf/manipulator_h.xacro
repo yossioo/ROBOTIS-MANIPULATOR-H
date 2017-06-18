@@ -2,16 +2,55 @@
 <!-- Revolute-Revolute Manipulator -->
 <robot name="robotis_manipulator_h" xmlns:xacro="http://www.ros.org/wiki/xacro">
     
-    <!-- some parameters -->
-    <xacro:property name="pi" value="3.141592654" />
-    
-    <!-- some parameters -->
-    <xacro:property name="pi" value="3.141592654" />
+<!--     <xacro:property name="pi" value="3.141592654" /> -->
     
     <!-- Import all Gazebo-customization elements, including Gazebo colors -->
     <xacro:include filename="$(find manipulator_h_description)/urdf/manipulator_h.gazebo" />
     <!-- Import Rviz colors -->
     <xacro:include filename="$(find manipulator_h_description)/urdf/materials.xacro" />
+<!--         IMPORT XTION_pro_live -->
+    <xacro:include filename="$(find manipulator_h_description)/urdf/xtion_pro_live.urdf.xacro"/>
+    
+    
+    <!-- Constants -->
+    <xacro:property name="deg_to_rad" value="0.01745329251994329577"/>
+    <xacro:property name="pi" value="3.141592654" />
+    <xacro:property name="M_SCALE" value="0.001 0.001 0.001"/> 
+    <xacro:property name="M_PI" value="3.14159"/>
+    
+    
+    <xacro:macro name="inertial_matrix" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="1.0" />
+        </inertial>
+    </xacro:macro>
+    
+<!--    <xacro:macro name="transmission_block" params="joint_name">
+        <transmission name="tran1">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint_name}">
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="motor1">
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <!-- Used for fixing robot to Gazebo 'link 1' -->
     <link name="world">
@@ -462,7 +501,7 @@
             <geometry>
                 <mesh filename="package://manipulator_h_description/meshes/dist.stl" scale="1 1 1"/>
             </geometry>
-<!--             <material name="blue"/> -->
+            <!--             <material name="blue"/> -->
         </visual>
         
         <inertial>
@@ -475,6 +514,13 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />-->
         </inertial> 
     </link>
+    
+    
+    
+    <xacro:xtion_pro_live name="rgbd_camera" parent="end">
+        <origin xyz="0.05 0 -0.075" rpy="${180.0 * deg_to_rad} ${-10.0 * deg_to_rad} ${0 * deg_to_rad}"/>
+        <origin xyz="0.05 0 -0.075" rpy="${180.0 * deg_to_rad} ${-10.0 * deg_to_rad} ${0 * deg_to_rad}"/>
+    </xacro:xtion_pro_live>
     
     <!--     TRANSMISSIONS FOR THE GRIPPER -->
     <transmission name="joint_r1">
@@ -498,5 +544,11 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
+    
+     <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/robotis_manipulator_h</robotNamespace>
+    </plugin>
+    </gazebo>
     
 </robot>
